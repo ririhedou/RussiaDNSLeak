@@ -10,8 +10,6 @@
 python parse.py
 ```
 
-Author: Ke and Prakhar
-
 ## Results:
 
 ```python 
