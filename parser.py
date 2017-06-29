@@ -65,12 +65,13 @@ def open_and_parse_file_to_get_domains(zonefile):
 
 
 def load_from_pickle_and_analyse(pickle):
+    print ('Loading........')
     ru = loadfrompickle(pickle)
     print (type(ru))
     for i in ru:
         print i
         print type(i)
-
+        raw_input('input any to continue')
     #TODO implement your own analysis here
 
 def test():
@@ -102,7 +103,8 @@ Stored example:
 '0--0--0.RU
 """
 if __name__=="__main__":
+    load_from_pickle_and_analyse('su.pickle')
     #test()
     #open_and_parse_file_to_get_domains('рф.zone')
-    open_and_parse_file_to_get_domains('дети.zone')
-    load_from_pickle_and_analyse('дети.pickle')
+    #open_and_parse_file_to_get_domains('дети.zone')
+    #load_from_pickle_and_analyse('дети.pickle')
