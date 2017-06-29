@@ -5,6 +5,10 @@
 ## Parsing: 
 
 ```python
+
+#unzip ru.zone.gz
+gzip --keep ru.zone.gz
+
 #utf-8 encoded to get russsian chars
 #include different functions to load and dump pickle data 
 python parse.py
