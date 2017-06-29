@@ -23,6 +23,8 @@ tatar: length of lines: 2089, unique domains 869
 дети: length of lines: 2557, unique domains 1067
 [Pickle]: save object into дети.pickle
 
+
+//Notice: the рф.zone is not in a good format! needs doublechekcing. 
 рф: length of lines: 307, unique domains 296
 [Pickle]: save object into рф.pickle
 ```
