@@ -1,6 +1,9 @@
-![](https://i.imgur.com/6oyUJH0.jpg)
 
 # Russian DNS Leak (All .ru, .su, .tatar, .рф, and .дети Domains) 
+
+## Parsing
+Ke and Prakhar
+
 
 ## Summary
 Due to an accidentally enabling of [global zone transfers](https://en.wikipedia.org/wiki/DNS_zone_transfer) on the Russian DNS nameservers `a.dns.ripn.net`, `d.dns.ripn.net`, and `f.dns.ripn.net` the [TLDR project](https://github.com/mandatoryprogrammer/TLDR) was able to capture a complete list of all domains registered under Russian TLD space. Russia has fixed this issue (possibly due to the problem [gaining traction after the TLDR project link was  posted to a Russian tech news aggregator](https://habrahabr.ru/post/331144/) by [@ValdikSS](https://twitter.com/ValdikSS)) so I am creating this repository to summarize the data collected due to this leak. Humorously the leak actually caused an outage for this TLDR service because the [leaked zone data was so large it killed the script attempting to collect it by filling up all available memory on the server](https://github.com/mandatoryprogrammer/TLDR/issues/11#issuecomment-309254675). This issue has now been fixed and the leaked DNS data is all backed up and hosted here for general consumption. The size of this dump is enormous compared to previous leaks such as the previously captured [North Korean DNS dump](https://github.com/mandatoryprogrammer/NorthKoreaDNSLeak), `.ru` domains alone account for over *[5.1% of all domain names on the Internet](https://w3techs.com/technologies/overview/top_level_domain/all)*.
