@@ -33,6 +33,7 @@ tatar: length of lines: 2089, unique domains 869
 
 
 //Notice: the рф.zone is not in a good format! needs doublechekcing. 
+//I cannot use VIM or CAT to view it. It just shows weired chars
 рф: length of lines: 307, unique domains 296
 [Pickle]: save object into рф.pickle
 ```
