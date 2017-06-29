@@ -4,7 +4,11 @@
 
 ## Parsing: 
 
-Code: parse.py
+```python
+#utf-8 encoded to get russsian chars
+#include different functions to load and dump pickle data 
+python parse.py
+```
 
 Author: Ke and Prakhar
 
@@ -34,6 +38,7 @@ tatar: length of lines: 2089, unique domains 869
 ## Project and data site: /home/cuckoo/labdata/RussiaDNSLeak
 
 ```bash
+SIZE  DATA
 100M	ru.pickle
 1.9M	su.pickle
 16K     tatar.pickle
