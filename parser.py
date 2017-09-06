@@ -19,6 +19,8 @@ def saveintopickle(obj, filename="obj.pickle"):
 def loadfrompickle(filename="obj.pickle"):
     with open(filename, 'rb') as handle:
         b = pickle.load(handle)
+
+    print ("done the loading")
     return b
 
 
@@ -62,8 +64,6 @@ def open_and_parse_file_to_get_domains(zonefile):
        print ("{}: length of lines: {}, unique domains {}".format(tldName,len(domains),len(unique)))
        saveintopickle(unique, tldName+'.pickle')
 
-
-
 def load_from_pickle_and_analyse(pickle):
     print ('Loading........')
     ru = loadfrompickle(pickle)
@@ -74,20 +74,16 @@ def load_from_pickle_and_analyse(pickle):
         raw_input('input any to continue')
     #TODO implement your own analysis here
 
-def test():
+def specify_filtering_rule():
+    pass
 
-    #zonefiles = read_zone_files_from_a_dir()
-    #analyze_zone_files(zonefiles)
+def analyze_domains_for_squatting(picklefile):
+    sets = loadfrompickle(picklefile)
+    for i in sets:
+        if "facebook" in str(i):
+            print (i)
 
-    """
-    ru = loadfrompickle('ru.pickle')
-    print
-    print (type(ru))
-    for i in ru:
-        print i
-        print type(i)
-        raw_input()
-    """
+    pass
 
 """
 Please extract ru.zone.gz before analyzed
@@ -103,8 +99,9 @@ Stored example:
 '0--0--0.RU
 """
 if __name__=="__main__":
-    load_from_pickle_and_analyse('su.pickle')
+    #load_from_pickle_and_analyse('su.pickle')
     #test()
+    #open_and_parse_file_to_get_domains('ru.zone')
     #open_and_parse_file_to_get_domains('рф.zone')
-    #open_and_parse_file_to_get_domains('дети.zone')
     #load_from_pickle_and_analyse('дети.pickle')
+    analyze_domains_for_squatting("pickleFile/ru.pickle")
