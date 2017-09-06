@@ -198,8 +198,13 @@ class DomainFuzz():
     def __hyphenation(self):
         result = []
 
-        for i in range(1, len(self.domain)):
-            result.append(self.domain[:i] + '-' + self.domain[i:])
+        for i in range(0, len(self.domain)+1):
+            if i == 0:
+                result.append('-'+self.domain)
+            elif i == len(self.domain):
+                result.append(self.domain + '-')
+            else:
+                result.append(self.domain[:i] + '-' + self.domain[i:])
 
         return result
 
@@ -300,50 +305,60 @@ class DomainFuzz():
         for item in self.domains:
             fuzzer = item['fuzzer']
             if fuzzer == fuzz_name:
-                print item['domain-name']
+                print (item['domain-name'])
 
-
+        return
 
     def generate(self):
 
-        self.domains.append({ 'fuzzer': 'Original*', 'domain-name': self.domain + '.' + self.tld })
-        for domain in self.__addition():
-            self.domains.append({ 'fuzzer': 'Addition', 'domain-name': domain + '.' + self.tld })
+        self.domains.append({ 'fuzzer': 'Original*', 'domain-name': self.domain })
+
         for domain in self.__bitsquatting():
-            self.domains.append({ 'fuzzer': 'Bitsquatting', 'domain-name': domain + '.' + self.tld })
+            self.domains.append({ 'fuzzer': 'bits-quatting: one letter', 'domain-name': domain })
+
         for domain in self.__homoglyph():
-            self.domains.append({ 'fuzzer': 'Homoglyph', 'domain-name': domain + '.' + self.tld })
-        for domain in self.__hyphenation():
-            self.domains.append({ 'fuzzer': 'Hyphenation', 'domain-name': domain + '.' + self.tld })
-        for domain in self.__insertion():
-            self.domains.append({ 'fuzzer': 'Insertion', 'domain-name': domain + '.' + self.tld })
-        for domain in self.__omission():
-            self.domains.append({ 'fuzzer': 'Omission', 'domain-name': domain + '.' + self.tld })
-        for domain in self.__repetition():
-            self.domains.append({ 'fuzzer': 'Repetition', 'domain-name': domain + '.' + self.tld })
-        for domain in self.__replacement():
-            self.domains.append({ 'fuzzer': 'Replacement', 'domain-name': domain + '.' + self.tld })
-        for domain in self.__subdomain():
-            self.domains.append({ 'fuzzer': 'Subdomain', 'domain-name': domain + '.' + self.tld })
-        for domain in self.__transposition():
-            self.domains.append({ 'fuzzer': 'Transposition', 'domain-name': domain + '.' + self.tld })
+            self.domains.append({ 'fuzzer': 'homo-squatting: graph-based', 'domain-name': domain })
+
         for domain in self.__vowel_swap():
-            self.domains.append({ 'fuzzer': 'Vowel-swap', 'domain-name': domain + '.' + self.tld })
+            self.domains.append({ 'fuzzer': 'homo-squatting: phone-based vowel-swap', 'domain-name': domain})
+
+
+        for domain in self.__hyphenation():
+            self.domains.append({ 'fuzzer': 'combo-squatting: hyphenation', 'domain-name': domain  })
+
+        for domain in self.__addition():
+            self.domains.append({ 'fuzzer': 'typo-squatting: addition', 'domain-name': domain  })
+        for domain in self.__insertion():
+            self.domains.append({ 'fuzzer': 'typo-squatting: insertion', 'domain-name': domain})
+        for domain in self.__omission():
+            self.domains.append({ 'fuzzer': 'typo-squatting: omission', 'domain-name': domain})
+        for domain in self.__repetition():
+            self.domains.append({ 'fuzzer': 'typo-squatting: repetition', 'domain-name': domain })
+        for domain in self.__replacement():
+            self.domains.append({ 'fuzzer': 'typo-squatting: replacement', 'domain-name': domain})
+        for domain in self.__transposition():
+            self.domains.append({ 'fuzzer': 'typo-squatting: transposition', 'domain-name': domain})
+        for domain in self.__subdomain():
+            self.domains.append({ 'fuzzer': 'typo-squatting: subdomain', 'domain-name': domain})
+
 
         if '.' in self.tld:
-            self.domains.append({ 'fuzzer': 'Various', 'domain-name': self.domain + '.' + self.tld.split('.')[-1] })
-            self.domains.append({ 'fuzzer': 'Various', 'domain-name': self.domain + self.tld })
+            self.domains.append({ 'fuzzer': 'various', 'domain-name': self.domain + '.' + self.tld.split('.')[-1] })
+            self.domains.append({ 'fuzzer': 'various', 'domain-name': self.domain + self.tld })
         if '.' not in self.tld:
-            self.domains.append({ 'fuzzer': 'Various', 'domain-name': self.domain + self.tld + '.' + self.tld })
+            self.domains.append({ 'fuzzer': 'various', 'domain-name': self.domain + self.tld + '.' + self.tld })
         if self.tld != 'com' and '.' not in self.tld:
-            self.domains.append({ 'fuzzer': 'Various', 'domain-name': self.domain + '-' + self.tld + '.com' })
+            self.domains.append({ 'fuzzer': 'various', 'domain-name': self.domain + '-' + self.tld + '.com' })
 
-        self.__filter_domains()
+        #self.__filter_domains()
 
 
 if __name__ == '__main__':
-    test = 'https://www.facebook.com'
-    fuzzers = ['typo-squatting','homo-squatting','bits-squatting','combo-squatting']
+    test = 'facebook.com'
+    fuzzers = ['typo-squatting','homo-squatting','bits-squatting','combo-squatting', 'others']
     a = DomainFuzz(test)
-    a.generate()
     print (a.domain,a.tld)
+
+    a.generate()
+    for ai in a.domains:
+        print (ai['fuzzer'],ai['domain-name'])

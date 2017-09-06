@@ -64,6 +64,7 @@ def open_and_parse_file_to_get_domains(zonefile):
        print ("{}: length of lines: {}, unique domains {}".format(tldName,len(domains),len(unique)))
        saveintopickle(unique, tldName+'.pickle')
 
+
 def load_from_pickle_and_analyse(pickle):
     print ('Loading........')
     ru = loadfrompickle(pickle)
@@ -85,9 +86,9 @@ def analyze_domains_for_squatting(picklefile):
 
     pass
 
+
 """
 Please extract ru.zone.gz before analyzed
-
 Analyzed:
 /Users/ketian/Desktop/RussiaDNSLeak/ru.zone
 /Users/ketian/Desktop/RussiaDNSLeak/su.zone

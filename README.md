@@ -31,12 +31,10 @@ tatar: length of lines: 2089, unique domains 869
 дети: length of lines: 2557, unique domains 1067
 [Pickle]: save object into дети.pickle
 
-
-//Notice: the рф.zone is not in a good format!  I  solve this by looking at the issue 1
-[Pickle]: save object into рф.pickle
+the рф.zone is in a compressed format!  I  solve this by looking at the issue 1
 ```
 
-## Project and data site: /home/cuckoo/labdata/RussiaDNSLeak
+## Project and data site:
 
 ```bash
 SIZE  DATA
@@ -44,7 +42,7 @@ SIZE  DATA
 1.9M	su.pickle
 16K     tatar.pickle
 36K     дети.pickle
-16K     рф.pickle
+27M	рф.pickle
 ```
 
 Stored as a set, each element is a string for domain name.
