@@ -2,4 +2,6 @@
 **/.DS_Store
 
 pickleFile/*.pickle
-pickleFile/*.ru
+pickleFile/*.zone
+
+.idea/
