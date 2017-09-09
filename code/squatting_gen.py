@@ -357,8 +357,10 @@ if __name__ == '__main__':
     test = 'facebook.com'
     fuzzers = ['typo-squatting','homo-squatting','bits-squatting','combo-squatting', 'others']
     a = DomainFuzz(test)
-    print (a.domain,a.tld)
+    print (a.domain),
+    print (a.tld)
 
     a.generate()
     for ai in a.domains:
-        print (ai['fuzzer'],ai['domain-name'])
+        print (ai['fuzzer']),
+        print (ai['domain-name'])

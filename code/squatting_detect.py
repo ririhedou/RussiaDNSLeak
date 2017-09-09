@@ -16,9 +16,10 @@ sys.setdefaultencoding('utf8')
 
 EDIT_DISTANCE_THRESHOLD = 2
 HYPHEN_DISTANCE_THRESHOLD = 4
+DOMAIN_LENGTH_THRESHOLD = 20
 
-candidates =[u'facebook', u'youtube', u'paypal', u'bankofamerica.com', u'chase', u'wellsfargo', ]
 
+candidates =[u'facebook', u'youtube', u'paypal', u'bankofamerica.com', u'chase', u'wellsfargo', u'citi' ]
 
 FUZZER_CATEGORY = ['typo-squatting','homo-squatting','bits-squatting','combo-squatting', 'various']
 
@@ -97,6 +98,7 @@ def long_hyphens_identify(input_domain, base_domain):
 
     return False
 
+
 def direct_contain_basename_with_larger_distance(input_domain, base_domain):
 
     # contain the keyword of the basename
@@ -130,6 +132,14 @@ def small_edit_distance(input_domain, base_domain):
 
     return False
 
+def long_domain_name(inputdomain):
+
+    if len(inputdomain) > DOMAIN_LENGTH_THRESHOLD:
+        return True
+
+    return False
+
+
 def loadfrompickle(filename="obj.pickle"):
     with open(filename, 'rb') as handle:
         b = pickle.load(handle)
@@ -151,14 +161,17 @@ if __name__ == "__main__":
 
     #test("../pickleFile/дети.pickle")
     #test("../pickleFile/ru.pickle")
-    test("../pickleFile/рф.pickle")
+    #test("../pickleFile/рф.pickle")
 
     #print (u'facebook' in u'facebook------------------------')
     #print (editdistance.eval(u'facebook',u'facebook------------------------'))
-    #domain  = 'xn--pfarmer-t2a.com--------'.decode("idna")
+    domain  = 'xn--pfarmer-t2a.com'.decode("idna")
     #domain = 'fabooke'.decode('utf-8')
-    #print (domain)
+    print (domain)
     #domain = 'facebook'.decode("idna")
     #print domain
+
+    print (__domain_tld("loging.facebook.----------sub-------------.malicious-domain.com"))
+    print (__domain_tld("loging.facebook.----------sub-------------.facebook.com.cn"))
     #print (count_continous_hypens(domain))
     #print (editdistance.eval(domain,u'pfarmer.com'))

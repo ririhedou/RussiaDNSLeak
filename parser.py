@@ -105,4 +105,6 @@ if __name__=="__main__":
     #open_and_parse_file_to_get_domains('ru.zone')
     #open_and_parse_file_to_get_domains('рф.zone')
     #load_from_pickle_and_analyse('дети.pickle')
-    analyze_domains_for_squatting("pickleFile/ru.pickle")
+    #analyze_domains_for_squatting("pickleFile/ru.pickle")
+    for i in range(0x80, 0xFF):
+        print unichr(i)
