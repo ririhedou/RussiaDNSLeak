@@ -54,18 +54,17 @@ def __domain_tld(domain):
 
     return domain[0] + '.' + domain[1], domain[2]
 
-def compare_with_a_base_domain(input_domain,base_domain):
+def compare_with_a_base_domain(input_domain_tld,base_domain):
 
     #print (input_domain)
-
     try:
-        small_edit_distance(input_domain,base_domain)
-        direct_contain_basename_with_larger_distance(input_domain,base_domain)
-        long_hyphens_identify(input_domain,base_domain)
+        small_edit_distance(input_domain_tld,base_domain)
+        direct_contain_basename_with_larger_distance(input_domain_tld,base_domain)
+        long_hyphens_identify(input_domain_tld,base_domain)
 
     except:
         f = open('log-error.log','a')
-        f.write(input_domain)
+        f.write(input_domain_tld)
         f.write('\n')
         f.flush()
         f.close()
@@ -154,7 +153,6 @@ def test(pickle):
     for i in domainSets:
         i = i.decode("idna")
         compare_with_a_base_domain(i,u'facebook')
-
 
 
 if __name__ == "__main__":
