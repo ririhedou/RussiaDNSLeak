@@ -12,11 +12,15 @@ make install;
 pip install python-snappy
 
 
+chrome idn policy:
+https://www.chromium.org/developers/design-documents/idn-in-google-chrome
+
 """
 __author__ = 'ketian'
 __version__ = '1.04b'
 __email__ = 'ririhedou@gmail.com'
 
+import pprint
 #import snappy
 import fastavro as avro
 #from avro import schema, datafile, io
@@ -43,6 +47,7 @@ schema = {
     ]
 }
 
+
 def analyze_avro(avro_file):
 
     with open(avro_file, 'r') as fo:
@@ -53,14 +58,21 @@ def analyze_avro(avro_file):
         print ("Schema is")
 
         base_domain = u'facebook'
+        base_domain = u'paypal'
         c = 0
+
+        pp = pprint.PrettyPrinter(indent=4)
         for record in reader:
+
+            pp.pprint(record)
+            raw_input()
+            old_qname = record['qname']
             qname = record['qname']
             #print (qname)
             if len(qname) > 1:
                 try:
                     qname = qname[:-1].decode('idna')
-                    compare_with_a_base_domain(qname,base_domain)
+                    compare_with_a_base_domain(qname,base_domain,old_qname)
                 except:
                     f = open('unicode-log-error.log','a')
                     f.write(qname)

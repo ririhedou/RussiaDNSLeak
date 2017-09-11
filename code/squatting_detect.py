@@ -54,13 +54,21 @@ def __domain_tld(domain):
 
     return domain[0] + '.' + domain[1], domain[2]
 
-def compare_with_a_base_domain(input_domain_tld,base_domain):
+def compare_with_a_base_domain(input_domain_tld,base_domain,original_domain):
 
     #print (input_domain)
     try:
-        small_edit_distance(input_domain_tld,base_domain)
-        direct_contain_basename_with_larger_distance(input_domain_tld,base_domain)
-        long_hyphens_identify(input_domain_tld,base_domain)
+        t1 = small_edit_distance(input_domain_tld,base_domain)
+        t2 = direct_contain_basename_with_larger_distance(input_domain_tld,base_domain)
+        t3 = long_hyphens_identify(input_domain_tld,base_domain)
+
+        if t1 or t2 or t3:
+            print (original_domain)
+            f = open(base_domain + '.log', 'a')
+            f.write(original_domain)
+            f.write('\n')
+            f.flush()
+            f.close()
 
     except:
         f = open('log-error.log','a')
@@ -87,12 +95,6 @@ def long_hyphens_identify(input_domain, base_domain):
         return False
 
     if count_continous_hypens(domain):
-        print (input_domain, domain, tld)
-        f = open(base_domain + '.log', 'a')
-        f.write(input_domain)
-        f.write('\n')
-        f.flush()
-        f.close()
         return True
 
     return False
@@ -105,12 +107,6 @@ def direct_contain_basename_with_larger_distance(input_domain, base_domain):
     if base_domain in domain:
         distance = editdistance.eval(domain, base_domain)
         if distance > EDIT_DISTANCE_THRESHOLD:
-            print (input_domain, domain, tld)
-            f = open(base_domain + '.log', 'a')
-            f.write(input_domain)
-            f.write('\n')
-            f.flush()
-            f.close()
             return True
 
     return False
@@ -121,12 +117,6 @@ def small_edit_distance(input_domain, base_domain):
     domain, tld = __domain_tld(input_domain)
     distance = editdistance.eval(domain, base_domain)
     if distance <= EDIT_DISTANCE_THRESHOLD:
-        print (input_domain, domain, tld)
-        f = open(base_domain + '.log', 'a')
-        f.write(input_domain)
-        f.write('\n')
-        f.flush()
-        f.close()
         return True
 
     return False
