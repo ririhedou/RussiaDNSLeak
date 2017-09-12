@@ -64,11 +64,13 @@ def analyze_avro(avro_file):
         pp = pprint.PrettyPrinter(indent=4)
         for record in reader:
 
-            pp.pprint(record)
-            raw_input()
+            #pp.pprint(record)
+            #raw_input()
             old_qname = record['qname']
             qname = record['qname']
             #print (qname)
+            print (type(record))
+
             if len(qname) > 1:
                 try:
                     qname = qname[:-1].decode('idna')
@@ -90,4 +92,6 @@ def analyze_avro(avro_file):
 if __name__ == "__main__":
     active_dns_file = "/home/datashare/dns/2week/20170820"
     active_dns_file_local_test_data = "../data/part-r-00001.avro"
+    active_dns_file_local_test_data = "/home/datashare/dns/2week/20170820/data/part-r-00001.avro"
+
     analyze_avro(active_dns_file_local_test_data)
