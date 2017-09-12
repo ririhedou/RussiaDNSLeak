@@ -8,7 +8,9 @@ __email__ = 'ririhedou@gmail.com'
 import sys,re
 from os import path
 import pickle
-import editdistance
+#import editdistance
+
+import pylev
 
 import sys
 reload(sys)
@@ -105,7 +107,7 @@ def direct_contain_basename_with_larger_distance(input_domain, base_domain):
     # contain the keyword of the basename
     domain, tld = __domain_tld(input_domain)
     if base_domain in domain:
-        distance = editdistance.eval(domain, base_domain)
+        distance = pylev.levenshtein(domain, base_domain)
         if distance > EDIT_DISTANCE_THRESHOLD:
             return True
 
@@ -115,7 +117,7 @@ def small_edit_distance(input_domain, base_domain):
 
     # a small edit-distance
     domain, tld = __domain_tld(input_domain)
-    distance = editdistance.eval(domain, base_domain)
+    distance = pylev.levenshtein(domain, base_domain)
     if distance <= EDIT_DISTANCE_THRESHOLD:
         return True
 
@@ -162,4 +164,4 @@ if __name__ == "__main__":
     print (__domain_tld("loging.facebook.----------sub-------------.malicious-domain.com"))
     print (__domain_tld("loging.facebook.----------sub-------------.facebook.com.cn"))
     #print (count_continous_hypens(domain))
-    #print (editdistance.eval(domain,u'pfarmer.com'))
+    print (pylev.levenshtein(domain,u'pfarmer.com'))
